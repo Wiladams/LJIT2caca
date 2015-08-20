@@ -702,6 +702,33 @@ local exports = {
 
     -- Events
     CACA_EVENT_KEY_PRESS = ffi.C.CACA_EVENT_KEY_PRESS;
+
+    -- Library functions
+	caca_create_canvas = Lib_caca.caca_create_canvas;
+	caca_get_canvas_width = Lib_caca.caca_get_canvas_width;
+	caca_get_canvas_height = Lib_caca.caca_get_canvas_height;
+
+
+	caca_create_display = Lib_caca.caca_create_display;
+	caca_set_color_ansi = Lib_caca.caca_set_color_ansi;
+	caca_import_canvas_from_memory = Lib_caca.caca_import_canvas_from_memory;
+	caca_set_canvas_handle = Lib_caca.caca_set_canvas_handle;
+	caca_put_str = Lib_caca.caca_put_str;
+	caca_blit = Lib_caca.caca_blit;
+	caca_refresh_display = Lib_caca.caca_refresh_display;
+	caca_get_event = Lib_caca.caca_get_event;
+	caca_free_display = Lib_caca.caca_free_display;
+	caca_free_canvas = Lib_caca.caca_free_canvas;
+
+    -- bitmap font handling
+    caca_get_font_list = Lib_caca.caca_get_font_list;
+    caca_load_font = Lib_caca.caca_load_font;
+    caca_get_font_width = Lib_caca.caca_get_font_width;
+    caca_get_font_height = Lib_caca.caca_get_font_height;
+    caca_get_font_blocks = Lib_caca.caca_get_font_blocks;
+    caca_render_canvas = Lib_caca.caca_render_canvas;
+    caca_free_font = Lib_caca.caca_free_font;
+
 }
 
 setmetatable(exports, {

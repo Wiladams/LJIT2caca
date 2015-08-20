@@ -4,25 +4,8 @@ local ffi = require("ffi")
 local caca_ffi = require("caca_ffi")()
 local Lib = caca_ffi.Lib_caca;
 
-local caca_create_canvas = Lib.caca_create_canvas;
-local caca_get_canvas_width = Lib.caca_get_canvas_width;
-local caca_get_canvas_height = Lib.caca_get_canvas_height;
 
-
-local caca_create_display = Lib.caca_create_display
-local caca_set_color_ansi = Lib.caca_set_color_ansi;
-local caca_import_canvas_from_memory = Lib.caca_import_canvas_from_memory
-local caca_set_canvas_handle = Lib.caca_set_canvas_handle
-local caca_put_str = Lib.caca_put_str
-local caca_blit = Lib.caca_blit
-local caca_refresh_display = Lib.caca_refresh_display
-local caca_get_event = Lib.caca_get_event
-local caca_free_display = Lib.caca_free_display
-local caca_free_canvas = Lib.caca_free_canvas
-
-
-
-pig =[[
+local pig =[[
   ,__         __,
    \\)`\\_..._/`(/
    .'  _   _  '.
