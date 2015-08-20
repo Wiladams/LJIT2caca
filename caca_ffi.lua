@@ -689,7 +689,7 @@ void   caca_conio_window(int left, int top, int right, int bottom);
 ]]
 
 
-local Lib_caca = ffi.load("libcaca")
+local Lib_caca = ffi.load("caca")
 
 local exports = {
     
