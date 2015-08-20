@@ -692,7 +692,16 @@ void   caca_conio_window(int left, int top, int right, int bottom);
 local Lib_caca = ffi.load("caca")
 
 local exports = {
-    
+    Lib_caca = Lib_caca;
+
+    -- Colors
+    CACA_WHITE = ffi.C.CACA_WHITE;
+    CACA_BLUE = ffi.C.CACA_BLUE;
+    CACA_LIGHTRED = ffi.C.CACA_LIGHTRED;
+    CACA_BLACK = ffi.C.CACA_BLACK;
+
+    -- Events
+    CACA_EVENT_KEY_PRESS = ffi.C.CACA_EVENT_KEY_PRESS;
 }
 
 setmetatable(exports, {
@@ -703,3 +712,5 @@ setmetatable(exports, {
         return self;
     end,
 })
+
+return exports
