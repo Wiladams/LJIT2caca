@@ -689,19 +689,55 @@ void   caca_conio_window(int left, int top, int right, int bottom);
 ]]
 
 
-local Lib_caca = ffi.load("caca")
+local Lib_caca = nil;
 
+if ffi.os == "Windows" then
+    Lib_caca = ffi.load("libcaca")
+elseif ffi.os == "Linux" then
+    Lib_caca = ffi.load("caca")
+end
+
+--[[
+    Make all the functions and constants relatively
+    easy to access.
+
+    This should contain all the functions over time, but for
+    now it only contains the ones that I have actually used
+    thus far.
+--]]
 local exports = {
     Lib_caca = Lib_caca;
 
     -- Colors
-    CACA_WHITE = ffi.C.CACA_WHITE;
-    CACA_BLUE = ffi.C.CACA_BLUE;
-    CACA_LIGHTRED = ffi.C.CACA_LIGHTRED;
     CACA_BLACK = ffi.C.CACA_BLACK;
+    CACA_BLUE = ffi.C.CACA_BLUE;
+    CACA_GREEN = ffi.C.CACA_GREEN;
+    CACA_CYAN = ffi.C.CACA_CYAN;
+    CACA_RED = ffi.C.CACA_RED;
+    CACA_MAGENTA = ffi.C.CACA_MAGENTA;
+    CACA_BROWN = ffi.C.CACA_BROWN;
+    CACA_LIGHTGRAY = ffi.C.CACA_LIGHTGRAY;
+    CACA_DARKGRAY = ffi.C.CACA_DARKGRAY;
+    CACA_LIGHTBLUE = ffi.C.CACA_LIGHTBLUE;
+    CACA_LIGHTGREEN = ffi.C.CACA_LIGHTGREEN;
+    CACA_LIGHTCYAN = ffi.C.CACA_LIGHTCYAN;
+    CACA_LIGHTRED = ffi.C.CACA_LIGHTRED;
+    CACA_LIGHTMAGENTA = ffi.C.CACA_LIGHTMAGENTA;
+    CACA_YELLOW = ffi.C.CACA_YELLOW;
+    CACA_WHITE = ffi.C.CACA_WHITE;
+    CACA_DEFAULT = ffi.C.CACA_DEFAULT;
+    CACA_TRANSPARENT = ffi.C.CACA_TRANSPARENT;
 
     -- Events
+    CACA_EVENT_NONE = ffi.C.CACA_EVENT_NONE;
     CACA_EVENT_KEY_PRESS = ffi.C.CACA_EVENT_KEY_PRESS;
+    CACA_EVENT_KEY_RELEASE = ffi.C.CACA_EVENT_KEY_RELEASE;
+    CACA_EVENT_MOUSE_PRESS = ffi.C.CACA_EVENT_MOUSE_PRESS;
+    CACA_EVENT_MOUSE_RELEASE = ffi.C.CACA_EVENT_MOUSE_RELEASE;
+    CACA_EVENT_MOUSE_MOTION = ffi.C.CACA_EVENT_MOUSE_MOTION;
+    CACA_EVENT_RESIZE = ffi.C.CACA_EVENT_RESIZE;
+    CACA_EVENT_QUIT = ffi.C.CACA_EVENT_QUIT;
+    CACA_EVENT_ANY = ffi.C.CACA_EVENT_ANY;
 
     -- Library functions
 	caca_create_canvas = Lib_caca.caca_create_canvas;
@@ -720,6 +756,15 @@ local exports = {
 	caca_free_display = Lib_caca.caca_free_display;
 	caca_free_canvas = Lib_caca.caca_free_canvas;
 
+    -- character set conversions
+    caca_utf8_to_utf32 = Lib_caca.caca_utf8_to_utf32;
+    caca_utf32_to_utf8 = Lib_caca.caca_utf32_to_utf8;
+    caca_utf32_to_cp437 = Lib_caca.caca_utf32_to_cp437;
+    caca_cp437_to_utf32 = Lib_caca.caca_cp437_to_utf32;
+    caca_utf32_to_ascii = Lib_caca.caca_utf32_to_ascii;
+    caca_utf32_is_fullwidth = Lib_caca.caca_utf32_is_fullwidth;
+
+
     -- bitmap font handling
     caca_get_font_list = Lib_caca.caca_get_font_list;
     caca_load_font = Lib_caca.caca_load_font;
@@ -731,6 +776,15 @@ local exports = {
 
 }
 
+--[[
+    The following is a convenience for getting everything in the
+    exports table into the global table.
+
+    You use it like this:
+
+    caca = require("caca_ffi")
+    caca()
+--]]
 setmetatable(exports, {
     __call = function (self, ...)
         for k,v in pairs(self) do
